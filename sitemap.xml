@@ -3,7 +3,7 @@
 
     <sitemap>
         <loc>http://www.gyblosing.wang/post-sitemap.xml</loc>
-        <lastmod>2018-02-01T11:48:08.920Z</lastmod>
+        <lastmod>2018-02-01T11:51:23.584Z</lastmod>
     </sitemap>
 
     <sitemap>
@@ -12,8 +12,13 @@
     </sitemap>
 
     <sitemap>
+        <loc>http://www.gyblosing.wang/category-sitemap.xml</loc>
+        <lastmod>2018-02-01T11:51:23.584Z</lastmod>
+    </sitemap>
+
+    <sitemap>
         <loc>http://www.gyblosing.wang/tag-sitemap.xml</loc>
-        <lastmod>2018-02-01T11:48:08.920Z</lastmod>
+        <lastmod>2018-02-01T11:51:23.584Z</lastmod>
     </sitemap>
 
 </sitemapindex>
