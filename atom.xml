@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.gyblosing.wang/"/>
-  <updated>2018-01-31T07:44:57.567Z</updated>
+  <updated>2018-02-01T06:02:31.182Z</updated>
   <id>http://www.gyblosing.wang/</id>
   
   <author>
@@ -21,17 +21,21 @@
     <link href="http://www.gyblosing.wang/2018/01/31/hello/"/>
     <id>http://www.gyblosing.wang/2018/01/31/hello/</id>
     <published>2018-01-31T07:44:38.577Z</published>
-    <updated>2018-01-31T07:44:57.567Z</updated>
+    <updated>2018-02-01T06:02:31.182Z</updated>
     
-    <content type="html"><![CDATA[<hr><p>title: hello<br>date: 2018-01-31 15:44:38</p><h2 id="tags"><a href="#tags" class="headerlink" title="tags:"></a>tags:</h2><p>你好  hexo</p>]]></content>
+    <content type="html"><![CDATA[<p>﻿﻿﻿﻿—<br>title: hello<br>date: 2018-01-31 15:44:38<br>tags:</p><ul><li>测试<br>categories: </li><li>前端</li></ul><hr><p>你好  hexo啊实打实</p>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;hr&gt;
-&lt;p&gt;title: hello&lt;br&gt;date: 2018-01-31 15:44:38&lt;/p&gt;
-&lt;h2 id=&quot;tags&quot;&gt;&lt;a href=&quot;#tags&quot; class=&quot;headerlink&quot; title=&quot;tags:&quot;&gt;&lt;/a&gt;tags:&lt;/h2&gt;&lt;p&gt;你好  he
+        &lt;p&gt;﻿﻿﻿﻿—&lt;br&gt;title: hello&lt;br&gt;date: 2018-01-31 15:44:38&lt;br&gt;tags:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;测试&lt;br&gt;categories: &lt;/li&gt;
+&lt;li&gt;前端&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;你好  hexo啊实打实&lt;/
       
     
     </summary>
