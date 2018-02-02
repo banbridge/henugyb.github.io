@@ -3,7 +3,7 @@
   
     
     <entry>
-      <title><![CDATA[Java的填坑之路——函数参数的两种调用]]></title>
+      <title><![CDATA[Java的填坑之路——he函数参数的两种调用]]></title>
       <url>/2018/02/02/2018/2/%E4%B8%A4%E7%A7%8D%E8%B0%83%E7%94%A8/</url>
       <content type="html"><![CDATA[<h1 id="值传递与引用传递"><a href="#值传递与引用传递" class="headerlink" title="值传递与引用传递"></a>值传递与引用传递</h1><p>程序设计语言中将参数传递给函数方法有两种，，按值传递(call by value)表示方法接收的是调用者提供的值。<br>而按引用传递(call by reference)表示方法接收的是调用者提供的变量地址。前者不可以修改原参数的值，而<br>后者可以，因为它修改的是那个地址里边的东西，原参数肯定会变。<strong><em>而Java总是采用按值调用</em></strong><br>比如一个方法：</p>
 <pre><code>private static void tripleValue(double per) {
