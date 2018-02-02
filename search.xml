@@ -1,27 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<search> 
-  
-    
-    <entry>
-      <title><![CDATA[Hexo填坑之路]]></title>
-      <url>/2018/02/01/2018/2/2018-2-first/</url>
-      <content type="html"><![CDATA[<h2 id="重拾Hexo"><a href="#重拾Hexo" class="headerlink" title="重拾Hexo"></a>重拾Hexo</h2><h5 id="如有兴趣自行搭建，搭建过程如下-PS-由于网上教程已经很多了，我就不写了，在此奉上链接-："><a href="#如有兴趣自行搭建，搭建过程如下-PS-由于网上教程已经很多了，我就不写了，在此奉上链接-：" class="headerlink" title="如有兴趣自行搭建，搭建过程如下(PS~由于网上教程已经很多了，我就不写了，在此奉上链接)："></a>如有兴趣自行搭建，搭建过程如下(PS~由于网上教程已经很多了，我就不写了，在此奉上链接)：<br></h5><h5 id="安装Hexo：Hexo的安装"><a href="#安装Hexo：Hexo的安装" class="headerlink" title="安装Hexo：Hexo的安装"></a>安装Hexo：<a href="http://blog.csdn.net/gdutxiaoxu/article/details/53576018" target="_blank" rel="noopener">Hexo的安装</a><br></h5><h5 id="绑定自己的域名：-个人域名绑定"><a href="#绑定自己的域名：-个人域名绑定" class="headerlink" title="绑定自己的域名： 个人域名绑定"></a>绑定自己的域名： <a href="http://blog.csdn.net/linshuhe1/article/details/73013730" target="_blank" rel="noopener">个人域名绑定</a><br></h5><h5 id="修改next主题-next官方文档（文档已经说的很清楚了）"><a href="#修改next主题-next官方文档（文档已经说的很清楚了）" class="headerlink" title="修改next主题: next官方文档（文档已经说的很清楚了）"></a>修改next主题: <a href="http://theme-next.iissnan.com/" target="_blank" rel="noopener">next官方文档</a>（文档已经说的很清楚了）<br></h5><h2 id="效果看本站就好"><a href="#效果看本站就好" class="headerlink" title="~~效果看本站就好~~"></a><del>~~<em>效果看本站就好</em></del>~~</h2>]]></content>
-      
-        <categories>
-            
-            <category> Hexo </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> Hexo </tag>
-            
-        </tags>
-        
-    </entry>
-    
-  
-  
+<search>
+  <entry>
+    <title><![CDATA[Java的填坑之路————————函数参数的两种调用]]></title>
+    <url>%2F2018%2F02%2F02%2F2018%2F2%2F%E4%B8%A4%E7%A7%8D%E8%B0%83%E7%94%A8%2F</url>
+    <content type="text"><![CDATA[值传递与引用传递程序设计语言中将参数传递给函数方法有两种，，按值传递(call by value)表示方法接收的是调用者提供的值。而按引用传递(call by reference)表示方法接收的是调用者提供的变量地址。前者不可以修改原参数的值，而后者可以，因为它修改的是那个地址里边的东西，原参数肯定会变。而Java总是采用按值调用比如一个方法： private static void tripleValue(double per) { per*=3; System.out.println(&quot;方法结束时：per=&quot; + per); } 但是你调用，却不会改变传入的值： double per = 10; System.out.println(&quot;执行方法之前:per=&quot; + per); tripleValue(per); System.out.println(&quot;执行方法之后:per=&quot; + per); 方法执行后per的值仍然是10。 然而方法参数共有两种类型： 基本参数类型（数字，布尔值） 对象 一个方法不可能修改一个基本数据类型的参数，但是对象作为参数就不同了，可以利用下边的这个方法实现更改: private static void tripleSalary(Employ x) { x.raiseSalary(120); System.out.println(&quot;方法结束时：salary=&quot; + x.getSalary()); } 执行下边一条命令： Employ harry = new Employ(&quot;Harry&quot;, 50000); System.out.println(&quot;执行方法之前:salary=&quot; + harry.getSalary()); tripleSalary(harry); 结果： 测试对象： 执行方法之前:salary=50000.0 方法结束时：salary=110000.0 执行方法之后:salary=110000.0 方法结束后，harry相应属性的值已经改变。按理说Java是按值传递，不应该改变才对，再看下边一个方法： private static void swap(Employ x, Employ y) { Employ e = x; x = y; y = e; System.out.println(&quot;方法完成时:x=&quot; + x.getName()); System.out.println(&quot;方法完成时:y=&quot; + y.getName()); } /** * Test3: 测试对象的传递类型 */ System.out.println(&quot;\n测试对象：&quot;); Employ jack = new Employ(&quot;Jack&quot;, 50000); Employ marry = new Employ(&quot;Marry&quot;, 0); System.out.println(&quot;执行方法之前:Jack = &quot; + jack.getName()); System.out.println(&quot;执行方法之前:Marry = &quot; + marry.getName()); swap(jack, marry); System.out.println(&quot;执行方法之后:Jack = &quot; + jack.getName()); System.out.println(&quot;执行方法之后:Marry = &quot; + marry.getName()); 执行结果： 测试对象： 执行方法之前:Jack = Jack 执行方法之前:Marry = Marry 方法完成时:x=Marry 方法完成时:y=Jack 执行方法之后:Jack = Jack 执行方法之后:Marry = Marry 方法并没有改变储存在jack和marry中对象引用，swap方法的参数只是x和y被初始化为两个对象的引用,这个方法交换的是两个拷贝。 在这里总结一下：我认为对对象的引用就是对地址的一份copy，而对基本参数的传递就是按值，然而为什么上边的对象的传递为什么会出现上述结果呢？ 比如说你new了一个对象harry，这个对象地址是0x1234，在方法中方法参数x是对harry对象地址的一个copy，地址也是0x1234，当你在方法中修改对象的状态时，改变的是x所指地址里边状态的改变，你在方法外边访问harry对象时，地址还是0x1234但是该地址里边的值已经在方法里边改变了，所以harry对象的状态也会改变。现在你new了两个对象jack和marry，地址分别为0x1235和0x1236,当进入swap方法时，两个参数x和y分别是对jack和marry地址的copy,x指向地址0x1235,而y指向0x1236，方法里边交换的只是地址值，方法结束时，x指向地址0x1236,而y指向0x1235,但方法外边jack和marry还是原地址，里边的值当然不会改变了 哈哈哈! 完整代码如下：public static void main(String[] args) { /** * Test1: 测试变量的传递类型 */ System.out.println(&quot;测试变量：&quot;); double per = 10; System.out.println(&quot;执行方法之前:per=&quot; + per); tripleValue(per); System.out.println(&quot;执行方法之后:per=&quot; + per); /** * Test2: 测试对象的传递类型 */ System.out.println(&quot;\n测试对象：&quot;); Employ harry = new Employ(&quot;Harry&quot;, 50000); System.out.println(&quot;执行方法之前:salary=&quot; + harry.getSalary()); tripleSalary(harry); System.out.println(&quot;执行方法之后:salary=&quot; + harry.getSalary()); /** * Test3: 测试对象的传递类型 */ System.out.println(&quot;\n测试对象：&quot;); Employ jack = new Employ(&quot;Jack&quot;, 50000); Employ marry = new Employ(&quot;Marry&quot;, 0); System.out.println(&quot;执行方法之前:Jack = &quot; + jack.getName()); System.out.println(&quot;执行方法之前:Marry = &quot; + marry.getName()); swap(jack, marry); System.out.println(&quot;执行方法之后:Jack = &quot; + jack.getName()); System.out.println(&quot;执行方法之后:Marry = &quot; + marry.getName()); } private static void swap(Employ x, Employ y) { Employ e = x; x = y; y = e; System.out.println(&quot;方法完成时:x=&quot; + x.getName()); System.out.println(&quot;方法完成时:y=&quot; + y.getName()); } private static void tripleSalary(Employ harry) { harry.raiseSalary(120); System.out.println(&quot;方法结束时：salary=&quot; + harry.getSalary()); } private static void tripleValue(double per) { per*=3; System.out.println(&quot;方法结束时：per=&quot; + per); } // 输出： 测试变量： 执行方法之前:per=10.0 方法结束时：per=30.0 执行方法之后:per=10.0 测试对象： 执行方法之前:salary=50000.0 方法结束时：salary=110000.0 执行方法之后:salary=110000.0 测试对象： 执行方法之前:Jack = Jack 执行方法之前:Marry = Marry 方法完成时:x=Marry 方法完成时:y=Jack 执行方法之后:Jack = Jack 执行方法之后:Marry = Marry]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Hexo填坑之路]]></title>
+    <url>%2F2018%2F02%2F01%2F2018%2F2%2F2018-2-first%2F</url>
+    <content type="text"><![CDATA[重拾Hexo如有兴趣自行搭建，搭建过程如下(PS~由于网上教程已经很多了，我就不写了，在此奉上链接)：安装Hexo：Hexo的安装绑定自己的域名： 个人域名绑定修改next主题: next官方文档（文档已经说的很清楚了）~~效果看本站就好~~]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+      </tags>
+  </entry>
 </search>

@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.gyblosing.wang/"/>
-  <updated>2018-02-01T11:51:23.584Z</updated>
+  <updated>2018-02-02T06:27:47.800Z</updated>
   <id>http://www.gyblosing.wang/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Java的填坑之路————————函数参数的两种调用</title>
+    <link href="http://www.gyblosing.wang/2018/02/02/2018/2/%E4%B8%A4%E7%A7%8D%E8%B0%83%E7%94%A8/"/>
+    <id>http://www.gyblosing.wang/2018/02/02/2018/2/两种调用/</id>
+    <published>2018-02-02T05:36:42.000Z</published>
+    <updated>2018-02-02T06:27:47.800Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="值传递与引用传递"><a href="#值传递与引用传递" class="headerlink" title="值传递与引用传递"></a>值传递与引用传递</h1><p>程序设计语言中将参数传递给函数方法有两种，，按值传递(call by value)表示方法接收的是调用者提供的值。<br>而按引用传递(call by reference)表示方法接收的是调用者提供的变量地址。前者不可以修改原参数的值，而<br>后者可以，因为它修改的是那个地址里边的东西，原参数肯定会变。<strong><em>而Java总是采用按值调用</em></strong><br>比如一个方法：</p><pre><code>private static void tripleValue(double per) {        per*=3;        System.out.println(&quot;方法结束时：per=&quot; + per);}</code></pre><p> 但是你调用，却不会改变传入的值：</p><pre><code>double per = 10;System.out.println(&quot;执行方法之前:per=&quot; + per);tripleValue(per);System.out.println(&quot;执行方法之后:per=&quot; + per);</code></pre><p>方法执行后per的值仍然是10。</p><p>然而方法参数共有两种类型：</p><ul><li>基本参数类型（数字，布尔值）</li><li>对象</li></ul><p>一个方法不可能修改一个基本数据类型的参数，但是对象作为参数就不同了，可以利用下边的这个方法实现更改:</p><pre><code>private static void tripleSalary(Employ x) {    x.raiseSalary(120);    System.out.println(&quot;方法结束时：salary=&quot; + x.getSalary());}</code></pre><p>执行下边一条命令：</p><pre><code>Employ harry = new Employ(&quot;Harry&quot;, 50000);System.out.println(&quot;执行方法之前:salary=&quot; + harry.getSalary());tripleSalary(harry);    </code></pre><p>结果：</p><pre><code>测试对象：执行方法之前:salary=50000.0方法结束时：salary=110000.0执行方法之后:salary=110000.0</code></pre><p>方法结束后，harry相应属性的值已经改变。按理说Java是按值传递，不应该改变才对，再看下边一个方法：</p><pre><code>private static void swap(Employ x, Employ y) {   Employ e = x;   x = y;   y = e;   System.out.println(&quot;方法完成时:x=&quot; + x.getName());   System.out.println(&quot;方法完成时:y=&quot; + y.getName());}/** * Test3: 测试对象的传递类型 */System.out.println(&quot;\n测试对象：&quot;);Employ jack = new Employ(&quot;Jack&quot;, 50000);Employ marry = new Employ(&quot;Marry&quot;, 0);System.out.println(&quot;执行方法之前:Jack = &quot; + jack.getName());System.out.println(&quot;执行方法之前:Marry = &quot; + marry.getName());swap(jack, marry);System.out.println(&quot;执行方法之后:Jack = &quot; + jack.getName());System.out.println(&quot;执行方法之后:Marry = &quot; + marry.getName());</code></pre><p>执行结果：</p><pre><code>测试对象：执行方法之前:Jack = Jack执行方法之前:Marry = Marry方法完成时:x=Marry方法完成时:y=Jack执行方法之后:Jack = Jack执行方法之后:Marry = Marry</code></pre><p>方法并没有改变储存在jack和marry中对象引用，swap方法的参数只是x和y被初始化为两个对象的引用,<br>这个方法交换的是两个拷贝。</p><p>在这里总结一下：我认为对对象的引用就是对地址的一份copy，而对基本参数的传递就是按值，然而为什<br>么上边的对象的传递为什么会出现上述结果呢？</p><p>比如说你new了一个对象harry，这个对象地址是0x1234，在方法中方法参数x是对harry对象地址的一个copy，地址<br>也是0x1234，当你在方法中修改对象的状态时，改变的是x所指地址里边状态的改变，你在方法外边访问harry对象时，<br>地址还是0x1234但是该地址里边的值已经在方法里边改变了，所以harry对象的状态也会改变。<br><br>现在你new了两个对象jack和marry，地址分别为0x1235和0x1236,当进入swap方法时，两个参数x和y分别是对jack<br>和marry地址的copy,x指向地址0x1235,而y指向0x1236，方法里边交换的只是地址值，方法结束时，x指向地址0x1236,<br>而y指向0x1235,但方法外边jack和marry还是原地址，里边的值当然不会改变了  哈哈哈!</p><h1 id="完整代码如下："><a href="#完整代码如下：" class="headerlink" title="完整代码如下："></a>完整代码如下：</h1><pre><code>public static void main(String[] args) {    /**     * Test1: 测试变量的传递类型     */    System.out.println(&quot;测试变量：&quot;);    double per = 10;    System.out.println(&quot;执行方法之前:per=&quot; + per);    tripleValue(per);    System.out.println(&quot;执行方法之后:per=&quot; + per);    /**     * Test2: 测试对象的传递类型     */    System.out.println(&quot;\n测试对象：&quot;);    Employ harry = new Employ(&quot;Harry&quot;, 50000);    System.out.println(&quot;执行方法之前:salary=&quot; + harry.getSalary());    tripleSalary(harry);    System.out.println(&quot;执行方法之后:salary=&quot; + harry.getSalary());    /**     * Test3: 测试对象的传递类型     */    System.out.println(&quot;\n测试对象：&quot;);    Employ jack = new Employ(&quot;Jack&quot;, 50000);    Employ marry = new Employ(&quot;Marry&quot;, 0);    System.out.println(&quot;执行方法之前:Jack = &quot; + jack.getName());    System.out.println(&quot;执行方法之前:Marry = &quot; + marry.getName());    swap(jack, marry);    System.out.println(&quot;执行方法之后:Jack = &quot; + jack.getName());    System.out.println(&quot;执行方法之后:Marry = &quot; + marry.getName());}private static void swap(Employ x, Employ y) {    Employ e = x;    x = y;    y = e;    System.out.println(&quot;方法完成时:x=&quot; + x.getName());    System.out.println(&quot;方法完成时:y=&quot; + y.getName());}private static void tripleSalary(Employ harry) {    harry.raiseSalary(120);    System.out.println(&quot;方法结束时：salary=&quot; + harry.getSalary());}private static void tripleValue(double per) {    per*=3;    System.out.println(&quot;方法结束时：per=&quot; + per);}// 输出：   测试变量：执行方法之前:per=10.0方法结束时：per=30.0执行方法之后:per=10.0测试对象：执行方法之前:salary=50000.0方法结束时：salary=110000.0执行方法之后:salary=110000.0测试对象：执行方法之前:Jack = Jack执行方法之前:Marry = Marry方法完成时:x=Marry方法完成时:y=Jack执行方法之后:Jack = Jack执行方法之后:Marry = Marry</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;值传递与引用传递&quot;&gt;&lt;a href=&quot;#值传递与引用传递&quot; class=&quot;headerlink&quot; title=&quot;值传递与引用传递&quot;&gt;&lt;/a&gt;值传递与引用传递&lt;/h1&gt;&lt;p&gt;程序设计语言中将参数传递给函数方法有两种，，按值传递(call by value)表示方法接
+      
+    
+    </summary>
+    
+      <category term="Java" scheme="http://www.gyblosing.wang/categories/Java/"/>
+    
+    
+      <category term="Java" scheme="http://www.gyblosing.wang/tags/Java/"/>
+    
+  </entry>
   
   <entry>
     <title>Hexo填坑之路</title>
